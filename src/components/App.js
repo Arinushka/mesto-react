@@ -44,7 +44,7 @@ function App() {
       setIsDeletePopupOpen(true);
     }
     function handleCardClick (name, link){
-      setSelectedCard({name: name, link: link, alt: link, isOpen: true})
+      setSelectedCard({name: name, link: link, alt: name, isOpen: true})
     }
 
   return (

@@ -6,7 +6,7 @@ function Card (props){
   return(
     <>
       <button className="gallery__button-delete" type="button" onClick={props.onDeleteClick}></button>
-      <img className="gallery__image" src={props.link} alt="#" onClick={handleClick}/>
+      <img className="gallery__image" src={props.link} alt={props.name} onClick={handleClick}/>
       <div className="gallery__wrapper">
         <h2 className="gallery__name">{props.name}</h2>
           <div className="gallery__button-wrapper">
