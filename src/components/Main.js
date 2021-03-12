@@ -46,10 +46,8 @@ return (
         <section className="gallery">
           {cards.map((item)=>(
             <article className="gallery__card" key={item._id}>
-              <Card 
-                name ={item.name}
-                link={item.link}
-                likes={item.likes}
+              <Card
+                card = {item}
                 onClick={props.onCardClick}
                 onDeleteClick={props.onDeleteClick}/>
             </article>

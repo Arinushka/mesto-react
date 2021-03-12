@@ -10,7 +10,8 @@ function App() {
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
-    const [selectedCard, setSelectedCard] = React.useState({name:'', link:'', alt:'', isOpen:'' });
+    const [selectedCard, setSelectedCard] = React.useState({link:''});
+    const [isPopupWithImageOpen, setIsPopupWithImageOpen] = React.useState(false);
 
     function handleEditProfileClick (){
        setIsEditProfilePopupOpen(true);
@@ -27,7 +28,7 @@ function App() {
         setIsAddPlacePopupOpen(false);
         setIsEditAvatarPopupOpen(false);
         setIsDeletePopupOpen(false);
-        setSelectedCard({isOpen:false});
+        setIsPopupWithImageOpen(false);
     }
     function handleEscClose(evt){
       if (evt.key === 'Escape') {
@@ -43,8 +44,9 @@ function App() {
     function handleDeleteClick(){
       setIsDeletePopupOpen(true);
     }
-    function handleCardClick (name, link){
-      setSelectedCard({name: name, link: link, alt: name, isOpen: true})
+    function handleCardClick (card){
+      setSelectedCard(card) ;
+      setIsPopupWithImageOpen(true)
     }
 
   return (
@@ -53,7 +55,7 @@ function App() {
     <Main 
       onEditAvatar={handleEditAvatarClick} 
       onEditProfile={handleEditProfileClick} 
-      isAddPlacePopupOpen={handleAddPlaceClick}
+      onAddPlace={handleAddPlaceClick}
       onCardClick = {handleCardClick}
       onDeleteClick = {handleDeleteClick}
     />
@@ -66,9 +68,9 @@ function App() {
       onClose={closeAllPopups}
       escClose={handleEscClose}
       overlayClose={handleOverlayClose}>
-        <input className="popup__name popup__input popup_profile_name" id="name-card-profile" type="text" minLength="2" maxLength="40" placeholder="Name" name="input_name_profile" required/>
+        <input className="popup__name popup__input popup_profile_name" id="name-card-profile" type="text" minLength="2" maxLength="40" placeholder="Имя" name="input_name_profile" required/>
         <span className="popup__error" id="name-card-profile-error"></span>
-        <input className="popup__job popup__input popup_profile_job" id="job-card" type="text" minLength="2" maxLength="200" placeholder="Profession" name="input_job_profile" required/>
+        <input className="popup__job popup__input popup_profile_job" id="job-card" type="text" minLength="2" maxLength="200" placeholder="Профессия" name="input_job_profile" required/>
         <span className="popup__error" id="job-card-error"></span>
     </PopupWithForm>
 
@@ -80,9 +82,9 @@ function App() {
       onClose={closeAllPopups}
       escClose={handleEscClose}
       overlayClose={handleOverlayClose}>
-        <input className="popup__name popup__name_gallery popup__input" id="name-card" type="text" minLength="2" maxLength="30" placeholder="Name" name="input_name_gallery" required/>
+        <input className="popup__name popup__name_gallery popup__input" id="name-card" type="text" minLength="2" maxLength="30" placeholder="Название карточки" name="input_name_gallery" required/>
         <span className="popup__error" id="name-card-error"></span>
-        <input className="popup__job popup__link popup__input" id="link-card" type="url" placeholder="Link to picture" name="input_link_gallery" required/>
+        <input className="popup__job popup__link popup__input" id="link-card" type="url" placeholder="Ссылка для картинки" name="input_link_gallery" required/>
         <span className="popup__error" id="link-card-error"></span>
     </PopupWithForm>
 
@@ -94,7 +96,7 @@ function App() {
       onClose={closeAllPopups}
       escClose={handleEscClose}
       overlayClose={handleOverlayClose}>
-        <input className="popup__job popup__link popup__input" id="link-avatar" type="url" placeholder="Link to picture" name="input_link_profile" required/>
+        <input className="popup__job popup__link popup__input" id="link-avatar" type="url" placeholder="Ссылка для картинки" name="input_link_profile" required/>
         <span className="popup__error" id="link-avatar-error"></span>
     </PopupWithForm>
     <PopupWithForm 
@@ -106,6 +108,7 @@ function App() {
       escClose={handleEscClose}
       overlayClose={handleOverlayClose}/>
     <ImagePopup
+      isOpen={isPopupWithImageOpen}
       card={selectedCard}
       onClose={closeAllPopups}
       escClose={handleEscClose}
