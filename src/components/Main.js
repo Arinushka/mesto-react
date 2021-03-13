@@ -41,7 +41,7 @@ return (
         <p className="profile__job">{userDescription}</p>
         <button className="profile__button-edit" type="button" onClick={props.onEditProfile}></button>
       </div>
-      <button className="profile__button-add" type="button" onClick={props.isAddPlacePopupOpen}></button>
+      <button className="profile__button-add" type="button" onClick={props.onAddPlace}></button>
       </section>
         <section className="gallery">
           {cards.map((item)=>(
