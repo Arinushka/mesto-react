@@ -45,3 +45,4 @@
 @import url(./blocks/gallery/__button-wrapper/gallery__button-wrapper.css);
 @import url(./blocks/popup/__title-avatar/popup__title-avatar.css);
 @import url(./blocks/popup/__submit_avatar/popup__submit_avatar.css);
+@import url(./blocks/gallery/__button-delete/_hidden/gallery__button-delete_hidden.css);
