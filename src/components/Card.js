@@ -14,15 +14,22 @@ function Card (props){
   function handleClick() {
    props.onClick(card)
   }
-  
+  function handleLikeClick(){
+    props.onCardLike(card)
+  }
+  function handleDeleteClick(){
+    props.onCardDelete(card);
+    props.onDeleteClick();
+  }
+
   return(
     <>
-      <button className={cardDeleteButtonClassName} type="button" onClick={props.onDeleteClick}></button>
+      <button className={cardDeleteButtonClassName} type="button" onClick={handleDeleteClick}></button>
       <img className="gallery__image" src={card.link} alt={card.name} onClick={handleClick}/>
       <div className="gallery__wrapper">
         <h2 className="gallery__name">{card.name}</h2>
           <div className="gallery__button-wrapper">
-            <button className={cardLikeButtonClassName} type="button"></button>
+            <button className={cardLikeButtonClassName} onClick={handleLikeClick}type="button"></button>
             <span className="gallery__button-counter">{card.likes.length}</span>
          </div>
       </div>

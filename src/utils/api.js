@@ -82,8 +82,13 @@
             })
             .then(this._checkResponse)
     }
-
-
+    changeLikeCardStatus(cardId, isLiked){
+      if(isLiked){
+        return this.addLike(cardId)
+      }else{
+        return this.removeLike(cardId)
+      }
+    }
 }
 
 export const api = new Api({

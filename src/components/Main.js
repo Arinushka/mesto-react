@@ -1,24 +1,10 @@
 import React from 'react';
-import { api } from '../utils/api';
 import Card from './Card';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 function Main(props) {
 
-const [cards, setCards] = React.useState([]);
 const currentUser = React.useContext(CurrentUserContext);
-
-
-
-React.useEffect(()=>{
-  api.getInitialCards()
-    .then((data)=>{
-      setCards(data);
-     })
-    .catch((err)=>{
-      console.log(err);
-    })
-}, []);
 
 return (
   <main className="content">
@@ -35,9 +21,11 @@ return (
       <button className="profile__button-add" type="button" onClick={props.onAddPlace}></button>
       </section>
         <section className="gallery">
-          {cards.map((item)=>(
+          {props.cards.map((item)=>(
             <article className="gallery__card" key={item._id}>
               <Card
+                onCardDelete={props.onCardDelete}
+                onCardLike={props.onCardLike}
                 card = {item}
                 onClick={props.onCardClick}
                 onDeleteClick={props.onDeleteClick}/>
