@@ -32,7 +32,7 @@ React.useEffect(()=>{
     <PopupWithForm 
       name="gallery" 
       title="Новая карточка" 
-      button="Создать"
+      button={props.buttonTitle}
       isOpen={props.isOpen}
       onClose={props.onClose}
       escClose={props.escClose}

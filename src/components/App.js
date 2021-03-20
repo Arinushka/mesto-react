@@ -19,8 +19,17 @@ function App() {
     const [isPopupWithImageOpen, setIsPopupWithImageOpen] = React.useState(false);
     const [currentUser, setCurrentUser] = React.useState({});
     const [cards, setCards] = React.useState([]);
-    
+    const [buttonSave, setButtonSave] = React.useState('Сохранить');
+    const [buttonAdd, setButtonAdd] = React.useState('Создать');
 
+    function handleButtonSave(state){
+      setButtonSave(state);   
+    }
+
+    function handleButtonAdd(state){
+      setButtonAdd(state);
+    }
+  
     function handleEditProfileClick (){
        setIsEditProfilePopupOpen(true);
     }
@@ -37,12 +46,21 @@ function App() {
         setIsEditAvatarPopupOpen(false);
         setIsDeletePopupOpen(false);
         setIsPopupWithImageOpen(false);
+        document.removeEventListener('keydown', escClose);
     }
-    function handleEscClose(evt){
+    function escClose(evt){
       if (evt.key === 'Escape') {       
         closeAllPopups();
+        console.log('ggggggggggg')
+      }
     }
+
+    function handleEscClose(isOpen){
+      if(isOpen){
+        document.addEventListener('keydown', escClose)
+      }
     }
+
     function handleOverlayClose(evt) {
       if (evt.target.classList.contains('popup_opened')) {
         closeAllPopups();
@@ -92,40 +110,47 @@ function handleCardLike(card) {
 function handleCardDelete(card){
   api.deleteCard(card._id)
    .then(()=>{
-const newCards = cards.filter(item => item._id !== card._id);
-setCards(newCards);
+      const newCards = cards.filter(item => item._id !== card._id);
+      setCards(newCards);
    })
    .catch((err)=>{
-    console.log(err);
+      console.log(err);
   })
 }
 
 function handleUpdateUser ({name, about}){
+  handleButtonSave('Сохранение...');
   api.setUserInfo(name, about)
-  .then((data)=>{
-    setCurrentUser(data);
-    closeAllPopups();
+    .then((data)=>{
+      setCurrentUser(data);
+      handleButtonSave('Сохранить');
+      closeAllPopups();
+      
   })
-  .catch((err)=>{
-    console.log(err);
+    .catch((err)=>{
+      console.log(err);
   })
  }
 
  function handleUpdateAvatar({avatar}){
+   handleButtonSave('Сохранение...');
    api.updateAvatarImage(avatar)
-   .then((data)=>{
-     setCurrentUser(data);
-     closeAllPopups();
+    .then((data)=>{
+      setCurrentUser(data);
+      handleButtonSave('Сохранить');
+      closeAllPopups();
    })
    .catch((err)=>{
-    console.log(err);
+      console.log(err);
   })
  }
 
  function handleAddPlace ({name, link}){
+  handleButtonAdd('Создание...')
   api.addCard(name, link)
   .then((newCard)=>{
-    setCards([...cards, newCard]); 
+    setCards([newCard, ...cards]);
+    handleButtonAdd('Создать')
     closeAllPopups();
   })
   .catch((err)=>{
@@ -135,50 +160,53 @@ function handleUpdateUser ({name, about}){
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-    <Header/>
-    <Main 
-      onEditAvatar={handleEditAvatarClick} 
-      onEditProfile={handleEditProfileClick} 
-      onAddPlace={handleAddPlaceClick}
-      onCardClick = {handleCardClick}
-      onDeleteClick = {handleDeleteClick}
-      cards = {cards}
-      onCardLike = {handleCardLike}
-      onCardDelete = {handleDeleteCard}
-    />
-    <Footer/>
-    <EditProfilePopup 
-      isOpen={isEditProfilePopupOpen} 
-      onClose={closeAllPopups} 
-      escClose={handleEscClose}
-      overlayClose={handleOverlayClose}
-      onUpdateUser={handleUpdateUser}/>
-   <AddPlacePopup 
-      isOpen={isAddPlacePopupOpen} 
-      onClose={closeAllPopups} 
-      escClose={handleEscClose}
-      overlayClose={handleOverlayClose}
-      onAddPlace = {handleAddPlace}/>
-    <EditAvatarPopup 
-      isOpen={isEditAvatarPopupOpen} 
-      onClose={closeAllPopups}
-      escClose={handleEscClose}
-      overlayClose={handleOverlayClose}
-      onUpdateAvatar={handleUpdateAvatar}/> 
-    <DeletePopup 
-      card = {selectedCard}
-      isOpen={isDeletePopupOpen}
-      onClose={closeAllPopups}
-      escClose={handleEscClose}
-      overlayClose={handleOverlayClose}
-      onCardDelete={handleCardDelete}/>
-    <ImagePopup
-      isOpen={isPopupWithImageOpen}
-      card={selectedCard}
-      onClose={closeAllPopups}
-      escClose={handleEscClose}
-      overlayClose={handleOverlayClose}/>
-   </CurrentUserContext.Provider>
+      <Header/>
+      <Main 
+        onEditAvatar={handleEditAvatarClick} 
+        onEditProfile={handleEditProfileClick} 
+        onAddPlace={handleAddPlaceClick}
+        onCardClick = {handleCardClick}
+        onDeleteClick = {handleDeleteClick}
+        cards = {cards}
+        onCardLike = {handleCardLike}
+        onCardDelete = {handleDeleteCard}
+      />
+      <Footer/>
+      <EditProfilePopup 
+        isOpen={isEditProfilePopupOpen} 
+        onClose={closeAllPopups} 
+        escClose={handleEscClose}
+        overlayClose={handleOverlayClose}
+        onUpdateUser={handleUpdateUser}
+        buttonTitle={buttonSave}/>
+      <AddPlacePopup 
+        isOpen={isAddPlacePopupOpen} 
+        onClose={closeAllPopups} 
+        escClose={handleEscClose}
+        overlayClose={handleOverlayClose}
+        onAddPlace = {handleAddPlace}
+        buttonTitle={buttonAdd}/>
+      <EditAvatarPopup 
+        isOpen={isEditAvatarPopupOpen} 
+        onClose={closeAllPopups}
+        escClose={handleEscClose}
+        overlayClose={handleOverlayClose}
+        onUpdateAvatar={handleUpdateAvatar}
+        buttonTitle={buttonSave}/> 
+      <DeletePopup 
+        card = {selectedCard}
+        isOpen={isDeletePopupOpen}
+        onClose={closeAllPopups}
+        escClose={handleEscClose}
+        overlayClose={handleOverlayClose}
+        onCardDelete={handleCardDelete}/>
+      <ImagePopup
+        isOpen={isPopupWithImageOpen}
+        card={selectedCard}
+        onClose={closeAllPopups}
+        escClose={handleEscClose}
+        overlayClose={handleOverlayClose}/>
+    </CurrentUserContext.Provider>
   );
   
 }

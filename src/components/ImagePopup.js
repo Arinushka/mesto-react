@@ -3,14 +3,9 @@ import React from "react";
 function ImagePopup(props) {
 
   React.useEffect(()=>{
-    if(props.isOpen) document.addEventListener('keydown', props.escClose)
-    return () => {
-      document.removeEventListener('keydown', props.escClose);
-    };
+    props.escClose(props.isOpen);
   }, [props.isOpen, props.escClose])
-  
-
-  
+   
   return (
     <div  className={`popup popup_fullsize_wrapper ${props.isOpen && 'popup_opened'}`} onClick={props.overlayClose}>
       <form className="popup__container popup__fullsize" name="popup_fullsize"  >
@@ -22,4 +17,4 @@ function ImagePopup(props) {
     );
   }
  
-  export default ImagePopup;
+export default ImagePopup;
