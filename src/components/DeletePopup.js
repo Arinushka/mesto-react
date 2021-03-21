@@ -7,18 +7,18 @@ function DeletePopup(props) {
     e.preventDefault();
     props.onCardDelete(props.card);
     props.onClose();
-  } 
+  }
   return (
-    <PopupWithForm 
-      name="delete" 
-      title="Вы уверены?" 
+    <PopupWithForm
+      name="delete"
+      title="Вы уверены?"
       button="Да"
       isOpen={props.isOpen}
       onClose={props.onClose}
       escClose={props.escClose}
       overlayClose={props.overlayClose}
-      onSubmit={handleSubmit}/>
-    );
-  }
-  
-  export default DeletePopup;
+      onSubmit={handleSubmit} />
+  );
+}
+
+export default DeletePopup;
