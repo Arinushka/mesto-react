@@ -17,6 +17,7 @@ function App() {
   const [isDeletePopupOpen, setIsDeletePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({ link: '' });
   const [isPopupWithImageOpen, setIsPopupWithImageOpen] = React.useState(false);
+<<<<<<< HEAD
   const [currentUser, setCurrentUser] = React.useState({name:'', about:'', avatar:''});
   const [cards, setCards] = React.useState([]);
   const [buttonSave, setButtonSave] = React.useState('Сохранить');
@@ -29,6 +30,19 @@ function App() {
 
   function handleButton(state, setState) {
     setState(state)
+=======
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [cards, setCards] = React.useState([]);
+  const [buttonSave, setButtonSave] = React.useState('Сохранить');
+  const [buttonAdd, setButtonAdd] = React.useState('Создать');
+
+  function handleButtonSave(state) {
+    setButtonSave(state);
+  }
+
+  function handleButtonAdd(state) {
+    setButtonAdd(state);
+>>>>>>> 4cc44074ff0f0bc48b5d020db714eefcf350e2a2
   }
 
   function handleEditProfileClick() {
@@ -108,11 +122,17 @@ function App() {
   }
 
   function handleCardDelete(card) {
+<<<<<<< HEAD
     handleButton('Удаление...', setButtonDelete)
     api.deleteCard(card._id)
       .then(() => {
         const newCards = cards.filter(item => item._id !== card._id);
         handleButton('Да', setButtonDelete);
+=======
+    api.deleteCard(card._id)
+      .then(() => {
+        const newCards = cards.filter(item => item._id !== card._id);
+>>>>>>> 4cc44074ff0f0bc48b5d020db714eefcf350e2a2
         setCards(newCards);
       })
       .catch((err) => {
@@ -121,11 +141,19 @@ function App() {
   }
 
   function handleUpdateUser({ name, about }) {
+<<<<<<< HEAD
     handleButton('Сохранение...', setButtonSave);
     api.setUserInfo(name, about)
       .then((data) => {
         setCurrentUser(data);
         handleButton('Сохранить', setButtonSave);
+=======
+    handleButtonSave('Сохранение...');
+    api.setUserInfo(name, about)
+      .then((data) => {
+        setCurrentUser(data);
+        handleButtonSave('Сохранить');
+>>>>>>> 4cc44074ff0f0bc48b5d020db714eefcf350e2a2
         closeAllPopups();
 
       })
@@ -135,11 +163,19 @@ function App() {
   }
 
   function handleUpdateAvatar({ avatar }) {
+<<<<<<< HEAD
     handleButton('Сохранение...', setButtonSave);
     api.updateAvatarImage(avatar)
       .then((data) => {
         setCurrentUser(data);
         handleButton('Сохранить', setButtonSave);
+=======
+    handleButtonSave('Сохранение...');
+    api.updateAvatarImage(avatar)
+      .then((data) => {
+        setCurrentUser(data);
+        handleButtonSave('Сохранить');
+>>>>>>> 4cc44074ff0f0bc48b5d020db714eefcf350e2a2
         closeAllPopups();
       })
       .catch((err) => {
@@ -148,11 +184,19 @@ function App() {
   }
 
   function handleAddPlace({ name, link }) {
+<<<<<<< HEAD
     handleButton('Создание...', setButtonAdd);
     api.addCard(name, link)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         handleButton('Создать', setButtonAdd);
+=======
+    handleButtonAdd('Создание...')
+    api.addCard(name, link)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        handleButtonAdd('Создать')
+>>>>>>> 4cc44074ff0f0bc48b5d020db714eefcf350e2a2
         closeAllPopups();
       })
       .catch((err) => {
@@ -180,35 +224,51 @@ function App() {
         escClose={handleEscClose}
         overlayClose={handleOverlayClose}
         onUpdateUser={handleUpdateUser}
+<<<<<<< HEAD
         buttonTitle={buttonSave}
         isButtonActive={isButtonEdditProfile}
         onButtonActive={setIsButtonEdditProfile} />
+=======
+        buttonTitle={buttonSave} />
+>>>>>>> 4cc44074ff0f0bc48b5d020db714eefcf350e2a2
       <AddPlacePopup
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
         escClose={handleEscClose}
         overlayClose={handleOverlayClose}
         onAddPlace={handleAddPlace}
+<<<<<<< HEAD
         buttonTitle={buttonAdd}
         isButtonActive={isButtonAddPlace}
         onButtonActive={setIsButtonAddPlace} />
+=======
+        buttonTitle={buttonAdd} />
+>>>>>>> 4cc44074ff0f0bc48b5d020db714eefcf350e2a2
       <EditAvatarPopup
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
         escClose={handleEscClose}
         overlayClose={handleOverlayClose}
         onUpdateAvatar={handleUpdateAvatar}
+<<<<<<< HEAD
         buttonTitle={buttonSave}
         isButtonActive={isButtonAvatar}
         onButtonActive={setIsButtonAvatar} />
+=======
+        buttonTitle={buttonSave} />
+>>>>>>> 4cc44074ff0f0bc48b5d020db714eefcf350e2a2
       <DeletePopup
         card={selectedCard}
         isOpen={isDeletePopupOpen}
         onClose={closeAllPopups}
         escClose={handleEscClose}
         overlayClose={handleOverlayClose}
+<<<<<<< HEAD
         onCardDelete={handleCardDelete}
         buttonTitle={buttonDelete} />
+=======
+        onCardDelete={handleCardDelete} />
+>>>>>>> 4cc44074ff0f0bc48b5d020db714eefcf350e2a2
       <ImagePopup
         isOpen={isPopupWithImageOpen}
         card={selectedCard}

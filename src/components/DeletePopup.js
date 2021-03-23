@@ -8,6 +8,7 @@ function DeletePopup(props) {
     props.onCardDelete(props.card);
     props.onClose();
   }
+<<<<<<< HEAD
 
   React.useEffect(() => {
     props.escClose(props.isOpen);
@@ -27,3 +28,19 @@ function DeletePopup(props) {
 export default DeletePopup;
 
 
+=======
+  return (
+    <PopupWithForm
+      name="delete"
+      title="Вы уверены?"
+      button="Да"
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      escClose={props.escClose}
+      overlayClose={props.overlayClose}
+      onSubmit={handleSubmit} />
+  );
+}
+
+export default DeletePopup;
+>>>>>>> 4cc44074ff0f0bc48b5d020db714eefcf350e2a2
