@@ -12,9 +12,9 @@ export const deleteForm = document.querySelector('.popup_delete_card');
 export const popupNameInput = document.querySelector('.popup_profile_name');
 export const popupJobInput = document.querySelector('.popup_profile_job');
 export const validationConfig = {
-    formSelector: '.popup__container_form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit',
-    inputInvalidClass: 'popup__input_state_invalid',
-    buttonInvalidClass: 'popup__button_invalid',
+  formSelector: '.popup__container_form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inputInvalidClass: 'popup__input_state_invalid',
+  buttonInvalidClass: 'popup__button_invalid',
 };
