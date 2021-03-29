@@ -1,9 +1,6 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
-<<<<<<< HEAD
 import InputForm from './InputForm';
-=======
->>>>>>> 4cc44074ff0f0bc48b5d020db714eefcf350e2a2
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function EditProfilePopup(props) {
@@ -30,7 +27,7 @@ function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, props.isOpen]);
   return (
     <PopupWithForm
       name="profile"
@@ -40,7 +37,6 @@ function EditProfilePopup(props) {
       onClose={props.onClose}
       escClose={props.escClose}
       overlayClose={props.overlayClose}
-<<<<<<< HEAD
       onSubmit={handleSubmit}
       isButtonActive={props.isButtonActive}
       onButtonActive={props.onButtonActive}>
@@ -68,13 +64,6 @@ function EditProfilePopup(props) {
         name="input_job_profile"
         isOpen={props.isOpen}>
       </InputForm>
-=======
-      onSubmit={handleSubmit}>
-      <input value={name || ''} onChange={handleName} className="popup__name popup__input popup_profile_name" id="name-card-profile" type="text" minLength="2" maxLength="40" placeholder="Имя" name="input_name_profile" required />
-      <span className="popup__error" id="name-card-profile-error"></span>
-      <input value={description || ''} onChange={handleDescription} className="popup__job popup__input popup_profile_job" id="job-card" type="text" minLength="2" maxLength="200" placeholder="Профессия" name="input_job_profile" required />
-      <span className="popup__error" id="job-card-error"></span>
->>>>>>> 4cc44074ff0f0bc48b5d020db714eefcf350e2a2
     </PopupWithForm>
   );
 }

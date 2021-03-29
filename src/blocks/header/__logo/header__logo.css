@@ -1,5 +1,6 @@
 .header__logo {
-    background-image: url(../../../images/logo__header.png);
+    background-image: url(../../../images/photo_2021-03-23_19-26-03.jpg);
+    background-size: contain;
     background-repeat: no-repeat;
     width: 142px;
     height: 33px;

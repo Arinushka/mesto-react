@@ -23,7 +23,7 @@ function Card(props) {
   }
 
   return (
-    <>
+    <article className="gallery__card">
       <button className={cardDeleteButtonClassName} type="button" onClick={handleDeleteClick}></button>
       <img className="gallery__image" src={card.link} alt={card.name} onClick={handleClick} />
       <div className="gallery__wrapper">
@@ -33,7 +33,7 @@ function Card(props) {
           <span className="gallery__button-counter">{card.likes.length}</span>
         </div>
       </div>
-    </>
+    </article>
   );
 }
 

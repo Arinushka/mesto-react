@@ -20,17 +20,18 @@ function Main(props) {
         </div>
         <button className="profile__button-add" type="button" onClick={props.onAddPlace}></button>
       </section>
-      <section className="gallery">
-        {props.cards.map((item) => (
-          <article className="gallery__card" key={item._id}>
-            <Card
+      <section>
+        <div className={`${props.isLoading && 'loading'}`}></div>
+        <div className="gallery">
+          {props.cards.map((item) => (
+            <Card key={item._id}
               onCardDelete={props.onCardDelete}
               onCardLike={props.onCardLike}
               card={item}
               onClick={props.onCardClick}
               onDeleteClick={props.onDeleteClick} />
-          </article>
-        ))}
+          ))}
+        </div>
       </section>
     </main>
   );
